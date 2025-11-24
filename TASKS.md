@@ -3,7 +3,7 @@
 > Formato: `[ ]` para abrir, `[x]` para concluído.  
 > Sprints focam em pequenas implementações específicas.
 
-### Sprint 1 – Setup do projeto e estrutura
+### Sprint 1 – Setup do projeto e estrutura [x]
 
 #### 1.1 Projeto Django e core [x]
 
@@ -30,27 +30,27 @@
 - [x] Criar app `transactions` (`python manage.py startapp transactions`).
 - [x] Adicionar todas as apps em `INSTALLED_APPS` no `settings.py`.
 
-#### 1.3 Estrutura de templates e static
+#### 1.3 Estrutura de templates e static [x]
 
-- [ ] Criar pasta `templates/` na raiz do projeto.
-- [ ] Criar subpasta `templates/core/` para páginas globais (ex.: home, dashboard).
-- [ ] Criar subpastas por app (ex.: `templates/users/`, `templates/accounts/`).
-- [ ] Criar pasta `static/` na raiz para arquivos estáticos.
-- [ ] Configurar `STATICFILES_DIRS` se for necessário (`[BASE_DIR / "static"]`).
-- [ ] Testar renderização de um template simples usando `render()` em uma view.
+- [x] Criar pasta `templates/` na raiz do projeto.
+- [x] Criar subpasta `templates/core/` para páginas globais (ex.: home, dashboard).
+- [x] Criar subpastas por app (ex.: `templates/users/`, `templates/accounts/`).
+- [x] Criar pasta `static/` na raiz para arquivos estáticos.
+- [x] Configurar `STATICFILES_DIRS` se for necessário (`[BASE_DIR / "static"]`).
+- [x] Testar renderização de um template simples usando `render()` em uma view.
 
-#### 1.4 Integração inicial do TailwindCSS
+#### 1.4 Integração inicial do TailwindCSS [x]
 
-- [ ] Instalar TailwindCSS (via npm ou binário local).
-- [ ] Criar arquivo `tailwind.config.js`.
-- [ ] Configurar `content` do Tailwind para incluir templates Django (`"templates/**/*.html"`).
-- [ ] Criar arquivo `assets/css/input.css` com:
-  - [ ] `@tailwind base;`
-  - [ ] `@tailwind components;`
-  - [ ] `@tailwind utilities;`
-- [ ] Configurar script de build (ex.: `npx tailwindcss -i ./assets/css/input.css -o ./static/css/styles.css --watch`).
-- [ ] Rodar build inicial e garantir que `styles.css` é gerado.
-- [ ] Referenciar `styles.css` em `base.html` usando `{% load static %}`.
+- [x] Instalar TailwindCSS (via npm ou binário local).
+- [x] Criar arquivo `tailwind.config.js`.
+- [x] Configurar `content` do Tailwind para incluir templates Django (`"templates/**/*.html"`).
+- [x] Criar arquivo `assets/css/input.css` com:
+  - [x] `@tailwind base;`
+  - [x] `@tailwind components;`
+  - [x] `@tailwind utilities;`
+- [x] Configurar script de build (ex.: `npx tailwindcss -i ./assets/css/input.css -o ./static/css/styles.css --watch`).
+- [x] Rodar build inicial e garantir que `styles.css` é gerado.
+- [x] Referenciar `styles.css` em `base.html` usando `{% load static %}`.
 
 ---
 

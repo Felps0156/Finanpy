@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" class="h-full bg-zinc-950 text-slate-50">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Finanpy{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="min-h-screen bg-zinc-950 text-slate-50">
+    <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur border-b border-zinc-900">
+        <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+            <a class="text-lg font-semibold tracking-tight" href="/">Finanpy</a>
+            <nav class="flex gap-4 text-sm">
+                <a class="text-slate-400 hover:text-slate-50 transition-colors" href="/login/">Entrar</a>
+                <a class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-slate-50 font-medium" href="/cadastro/">Cadastre-se</a>
+            </nav>
+        </div>
+    </header>
+    <main class="mx-auto w-full max-w-6xl px-6 py-12">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
