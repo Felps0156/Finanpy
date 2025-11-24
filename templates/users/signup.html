@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastre-se - Finanpy{% endblock %}
+
+{% block content %}
+<section class="mx-auto w-full max-w-md">
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-8 shadow-2xl shadow-purple-900/20">
+        <div class="space-y-2 text-center">
+            <p class="text-xs uppercase tracking-[0.4em] text-purple-400">Cadastro</p>
+            <h1 class="text-2xl font-semibold">Crie sua conta gratuita</h1>
+            <p class="text-sm text-slate-400">Organize receitas e despesas em minutos.</p>
+        </div>
+        {% if form.non_field_errors %}
+            <div class="mt-6 rounded-xl border border-red-600/50 bg-red-900/30 px-4 py-3 text-sm text-red-200">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="post" class="mt-6 space-y-6">
+            {% csrf_token %}
+            <div class="space-y-1.5">
+                <label class="text-sm font-medium text-slate-200" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <p class="text-sm text-red-400">{{ form.email.errors|striptags }}</p>
+                {% endif %}
+            </div>
+            <div class="grid gap-5 md:grid-cols-2">
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-slate-200" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+                    {% if form.password1.help_text %}
+                        <p class="text-xs text-slate-500">{{ form.password1.help_text|safe }}</p>
+                    {% endif %}
+                    {% if form.password1.errors %}
+                        <p class="text-sm text-red-400">{{ form.password1.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-slate-200" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+                    {% if form.password2.help_text %}
+                        <p class="text-xs text-slate-500">{{ form.password2.help_text|safe }}</p>
+                    {% endif %}
+                    {% if form.password2.errors %}
+                        <p class="text-sm text-red-400">{{ form.password2.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-purple-500/30">
+                Criar conta
+            </button>
+        </form>
+        <p class="mt-6 text-center text-sm text-slate-400">
+            Já possui acesso?
+            <a class="font-medium text-indigo-400 hover:text-indigo-300" href="{% url 'users:login' %}">Entrar</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

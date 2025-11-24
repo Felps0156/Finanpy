@@ -82,25 +82,25 @@
   - [x] `/cadastro/` → `SignupView`.
 - [x] Incluir `users/urls.py` em `core/urls.py` com namespace `users`.
 
-#### 2.3 Templates de autenticação
+#### 2.3 Templates de autenticação [x]
 
-- [ ] Criar `templates/base.html` com:
-  - [ ] Estrutura básica HTML5.
-  - [ ] Inclusão de `{% load static %}`.
-  - [ ] Link para `/static/css/styles.css`.
-  - [ ] Navbar simples com logo "Finanpy" e links "Entrar" e "Cadastre-se" (quando usuário anônimo).
-  - [ ] Blocos `{% block content %}` para conteúdo principal.
+- [x] Criar `templates/base.html` com:
+  - [x] Estrutura básica HTML5.
+  - [x] Inclusão de `{% load static %}`.
+  - [x] Link para `/static/css/styles.css`.
+  - [x] Navbar simples com logo "Finanpy" e links "Entrar" e "Cadastre-se" (quando usuário anônimo).
+  - [x] Blocos `{% block content %}` para conteúdo principal.
 
-- [ ] Criar `templates/users/login.html`:
-  - [ ] Estender `base.html`.
-  - [ ] Formulário estilizado com Design System (inputs, labels, botão primário).
-  - [ ] Placeholders e labels em português brasileiro.
-  - [ ] Exibição de mensagens de erro de validação.
+- [x] Criar `templates/users/login.html`:
+  - [x] Estender `base.html`.
+  - [x] Formulário estilizado com Design System (inputs, labels, botão primário).
+  - [x] Placeholders e labels em português brasileiro.
+  - [x] Exibição de mensagens de erro de validação.
 
-- [ ] Criar `templates/users/signup.html`:
-  - [ ] Estender `base.html`.
-  - [ ] Formulário com campos email, senha, confirmação de senha.
-  - [ ] Exibir erros campo a campo, seguindo estilo do design system.
+- [x] Criar `templates/users/signup.html`:
+  - [x] Estender `base.html`.
+  - [x] Formulário com campos email, senha, confirmação de senha.
+  - [x] Exibir erros campo a campo, seguindo estilo do design system.
 
 #### 2.4 Landing page pública
 

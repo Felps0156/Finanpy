@@ -10,10 +10,15 @@
 <body class="min-h-screen bg-zinc-950 text-slate-50">
     <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur border-b border-zinc-900">
         <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-            <a class="text-lg font-semibold tracking-tight" href="/">Finanpy</a>
-            <nav class="flex gap-4 text-sm">
-                <a class="text-slate-400 hover:text-slate-50 transition-colors" href="/login/">Entrar</a>
-                <a class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-slate-50 font-medium" href="/cadastro/">Cadastre-se</a>
+            <a class="text-lg font-semibold tracking-tight" href="{% url 'home' %}">Finanpy</a>
+            <nav class="flex items-center gap-3 text-sm">
+                {% if request.user.is_authenticated %}
+                    <span class="mr-6 text-left text-slate-300">Olá, {{ request.user.email }}</span>
+                    <a class="rounded-full border border-zinc-700 px-5 py-2 text-slate-200 hover:border-zinc-500" href="{% url 'users:logout' %}">Sair</a>
+                {% else %}
+                    <a class="text-slate-400 hover:text-slate-50 transition-colors" href="{% url 'users:login' %}">Entrar</a>
+                    <a class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-slate-50 font-medium" href="{% url 'users:signup' %}">Cadastre-se</a>
+                {% endif %}
             </nav>
         </div>
     </header>

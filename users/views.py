@@ -1,5 +1,8 @@
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import FormView
 
 from users.forms import EmailAuthenticationForm, SignupForm
@@ -25,5 +28,10 @@ class EmailLoginView(LoginView):
         return self.success_url
 
 
-class LogoutRedirectView(LogoutView):
-    next_page = 'home'
+class LogoutRedirectView(View):
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('home')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
