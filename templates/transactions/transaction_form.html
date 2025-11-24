@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if view.object %}Editar transação{% else %}Nova transação{% endif %} - Finanpy{% endblock %}
+
+{% block content %}
+<section class="mx-auto w-full max-w-3xl space-y-6">
+    <div class="space-y-2">
+        <p class="text-sm uppercase tracking-[0.4em] text-indigo-400">Transações</p>
+        <h1 class="text-3xl font-semibold text-slate-50">
+            {% if view.object %}Atualizar transação{% else %}Registrar nova transação{% endif %}
+        </h1>
+        <p class="text-sm text-slate-400">Associe conta, categoria, valor e data para manter o saldo correto.</p>
+    </div>
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-8">
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            <div class="grid gap-5 md:grid-cols-2">
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-slate-200" for="{{ form.account.id_for_label }}">{{ form.account.label }}</label>
+                    {{ form.account }}
+                    {% if form.account.errors %}
+                        <p class="text-sm text-rose-400">{{ form.account.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-slate-200" for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+                    {{ form.category }}
+                    {% if form.category.errors %}
+                        <p class="text-sm text-rose-400">{{ form.category.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="grid gap-5 md:grid-cols-2">
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-slate-200" for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+                    {{ form.amount }}
+                    {% if form.amount.errors %}
+                        <p class="text-sm text-rose-400">{{ form.amount.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-slate-200" for="{{ form.date.id_for_label }}">{{ form.date.label }}</label>
+                    {{ form.date }}
+                    {% if form.date.errors %}
+                        <p class="text-sm text-rose-400">{{ form.date.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="space-y-1.5">
+                <label class="text-sm font-medium text-slate-200" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <p class="text-sm text-rose-400">{{ form.description.errors|striptags }}</p>
+                {% endif %}
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <button type="submit" class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white">
+                    {% if view.object %}Salvar alterações{% else %}Registrar transação{% endif %}
+                </button>
+                <a href="{% url 'transactions:list' %}" class="rounded-full border border-zinc-700 px-6 py-3 text-sm font-semibold text-slate-300">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

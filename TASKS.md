@@ -116,109 +116,109 @@
 
 ---
 
-### Sprint 3 – Models de domínio (profiles, accounts, categories, transactions)
+### Sprint 3 – Models de domínio (profiles, accounts, categories, transactions) [x]
 
-#### 3.1 Model Profile
+#### 3.1 Model Profile [x]
 
-- [ ] Em `profiles/models.py`, criar model `Profile` com:
-  - [ ] FK para `users.User` (`OneToOneField`).
-  - [ ] Campo `full_name` (`CharField`).
-  - [ ] Campos `created_at`, `updated_at` (`DateTimeField` com `auto_now_add`/`auto_now`).
-- [ ] Criar `__str__` retornando nome do usuário ou `full_name`.
-- [ ] Registrar model no `profiles/admin.py`.
-- [ ] Criar migrações (`makemigrations` e `migrate`).
+- [x] Em `profiles/models.py`, criar model `Profile` com:
+  - [x] FK para `users.User` (`OneToOneField`).
+  - [x] Campo `full_name` (`CharField`).
+  - [x] Campos `created_at`, `updated_at` (`DateTimeField` com `auto_now_add`/`auto_now`).
+- [x] Criar `__str__` retornando nome do usuário ou `full_name`.
+- [x] Registrar model no `profiles/admin.py`.
+- [x] Criar migrações (`makemigrations` e `migrate`).
 
-#### 3.2 Model Account
+#### 3.2 Model Account [x]
 
-- [ ] Em `accounts/models.py`, criar model `Account`:
-  - [ ] FK `user` para `users.User`.
-  - [ ] Campo `name` (`CharField`).
-  - [ ] Campo `balance` (`DecimalField` com `max_digits` e `decimal_places` adequados).
-  - [ ] Campos `created_at`, `updated_at`.
-- [ ] Definir `__str__` exibindo nome da conta.
-- [ ] Registrar model em `accounts/admin.py`.
-- [ ] Migrar.
+- [x] Em `accounts/models.py`, criar model `Account`:
+  - [x] FK `user` para `users.User`.
+  - [x] Campo `name` (`CharField`).
+  - [x] Campo `balance` (`DecimalField` com `max_digits` e `decimal_places` adequados).
+  - [x] Campos `created_at`, `updated_at`.
+- [x] Definir `__str__` exibindo nome da conta.
+- [x] Registrar model em `accounts/admin.py`.
+- [x] Migrar.
 
-#### 3.3 Model Category
+#### 3.3 Model Category [x]
 
-- [ ] Em `categories/models.py`, criar model `Category`:
-  - [ ] FK `user` para `users.User`.
-  - [ ] Campo `name`.
-  - [ ] Campo `type` com choices `entrada` e `saida`.
-  - [ ] Campos `created_at`, `updated_at`.
-- [ ] Registrar em `categories/admin.py`.
-- [ ] Migrar.
+- [x] Em `categories/models.py`, criar model `Category`:
+  - [x] FK `user` para `users.User`.
+  - [x] Campo `name`.
+  - [x] Campo `type` com choices `entrada` e `saida`.
+  - [x] Campos `created_at`, `updated_at`.
+- [x] Registrar em `categories/admin.py`.
+- [x] Migrar.
 
-#### 3.4 Model Transaction
+#### 3.4 Model Transaction [x]
 
-- [ ] Em `transactions/models.py`, criar model `Transaction`:
-  - [ ] FK `user` para `users.User`.
-  - [ ] FK `account` para `Account`.
-  - [ ] FK `category` para `Category`.
-  - [ ] Campo `amount` (`DecimalField`).
-  - [ ] Campo `date` (`DateField`).
-  - [ ] Campo `description` (`CharField` ou `TextField`, opcional).
-  - [ ] Campos `created_at`, `updated_at`.
-- [ ] Criar `__str__` exibindo categoria + valor + data.
-- [ ] Registrar em `transactions/admin.py`.
-- [ ] Migrar.
+- [x] Em `transactions/models.py`, criar model `Transaction`:
+  - [x] FK `user` para `users.User`.
+  - [x] FK `account` para `Account`.
+  - [x] FK `category` para `Category`.
+  - [x] Campo `amount` (`DecimalField`).
+  - [x] Campo `date` (`DateField`).
+  - [x] Campo `description` (`CharField` ou `TextField`, opcional).
+  - [x] Campos `created_at`, `updated_at`.
+- [x] Criar `__str__` exibindo categoria + valor + data.
+- [x] Registrar em `transactions/admin.py`.
+- [x] Migrar.
 
 ---
 
-### Sprint 4 – CRUDs e telas básicas
+### Sprint 4 – CRUDs e telas básicas [x]
 
-#### 4.1 CRUD de contas
+#### 4.1 CRUD de contas [x]
 
-- [ ] Criar views baseadas em classe em `accounts/views.py`:
-  - [ ] `AccountListView` (lista contas do usuário logado).
-  - [ ] `AccountCreateView`.
-  - [ ] `AccountUpdateView`.
-  - [ ] `AccountDeleteView`.
+- [x] Criar views baseadas em classe em `accounts/views.py`:
+  - [x] `AccountListView` (lista contas do usuário logado).
+  - [x] `AccountCreateView`.
+  - [x] `AccountUpdateView`.
+  - [x] `AccountDeleteView`.
 
-- [ ] Garantir uso de `LoginRequiredMixin` em todas as views.
-- [ ] Filtrar objetos por `user=request.user`.
+- [x] Garantir uso de `LoginRequiredMixin` em todas as views.
+- [x] Filtrar objetos por `user=request.user`.
 
-- [ ] Criar `accounts/urls.py` com rotas:
-  - [ ] `/contas/` → lista.
-  - [ ] `/contas/nova/` → criação.
-  - [ ] `/contas/<pk>/editar/` → edição.
-  - [ ] `/contas/<pk>/excluir/` → exclusão.
+- [x] Criar `accounts/urls.py` com rotas:
+  - [x] `/contas/` → lista.
+  - [x] `/contas/nova/` → criação.
+  - [x] `/contas/<pk>/editar/` → edição.
+  - [x] `/contas/<pk>/excluir/` → exclusão.
 
-- [ ] Incluir `accounts/urls.py` em `core/urls.py`.
+- [x] Incluir `accounts/urls.py` em `core/urls.py`.
 
-- [ ] Criar templates:
-  - [ ] `accounts/account_list.html`:
-    - [ ] Tabela ou cards listando contas.
-    - [ ] Botão "Nova conta".
-  - [ ] `accounts/account_form.html`:
-    - [ ] Formulário com campos estilizados segundo design system.
-  - [ ] `accounts/account_confirm_delete.html`:
-    - [ ] Mensagem clara "Você tem certeza que deseja excluir esta conta?".
+- [x] Criar templates:
+  - [x] `accounts/account_list.html`:
+    - [x] Tabela ou cards listando contas.
+    - [x] Botão "Nova conta".
+  - [x] `accounts/account_form.html`:
+    - [x] Formulário com campos estilizados segundo design system.
+  - [x] `accounts/account_confirm_delete.html`:
+    - [x] Mensagem clara "Você tem certeza que deseja excluir esta conta?".
 
-#### 4.2 CRUD de categorias
+#### 4.2 CRUD de categorias [x]
 
-- [ ] Criar views em `categories/views.py` (List/Create/Update/Delete).
-- [ ] Proteger com `LoginRequiredMixin` e filtragem por `request.user`.
-- [ ] Criar `categories/urls.py` com padrões similares a contas.
-- [ ] Criar templates:
-  - [ ] `categories/category_list.html`.
-  - [ ] `categories/category_form.html`.
-  - [ ] `categories/category_confirm_delete.html`.
+- [x] Criar views em `categories/views.py` (List/Create/Update/Delete).
+- [x] Proteger com `LoginRequiredMixin` e filtragem por `request.user`.
+- [x] Criar `categories/urls.py` com padrões similares a contas.
+- [x] Criar templates:
+  - [x] `categories/category_list.html`.
+  - [x] `categories/category_form.html`.
+  - [x] `categories/category_confirm_delete.html`.
 
-#### 4.3 CRUD de transações
+#### 4.3 CRUD de transações [x]
 
-- [ ] Criar views em `transactions/views.py`:
-  - [ ] `TransactionListView`.
-  - [ ] `TransactionCreateView`.
-  - [ ] `TransactionUpdateView`.
-  - [ ] `TransactionDeleteView`.
+- [x] Criar views em `transactions/views.py`:
+  - [x] `TransactionListView`.
+  - [x] `TransactionCreateView`.
+  - [x] `TransactionUpdateView`.
+  - [x] `TransactionDeleteView`.
 
-- [ ] Garantir que formulários listem apenas contas e categorias do usuário autenticado.
-- [ ] Criar `transactions/urls.py`.
-- [ ] Criar templates:
-  - [ ] `transactions/transaction_list.html` (listagem, filtros básicos).
-  - [ ] `transactions/transaction_form.html`.
-  - [ ] `transactions/transaction_confirm_delete.html`.
+- [x] Garantir que formulários listem apenas contas e categorias do usuário autenticado.
+- [x] Criar `transactions/urls.py`.
+- [x] Criar templates:
+  - [x] `transactions/transaction_list.html` (listagem, filtros básicos).
+  - [x] `transactions/transaction_form.html`.
+  - [x] `transactions/transaction_confirm_delete.html`.
 
 ---
 

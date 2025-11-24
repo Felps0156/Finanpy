@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Contas bancárias - Finanpy{% endblock %}
+
+{% block content %}
+<section class="space-y-8">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <p class="text-sm uppercase tracking-[0.4em] text-indigo-400">Finanças</p>
+            <h1 class="text-3xl font-semibold text-slate-50">Minhas contas bancárias</h1>
+            <p class="text-sm text-slate-400">Gerencie saldos e mantenha cada carteira organizada.</p>
+        </div>
+        <a href="{% url 'accounts:create' %}" class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white">+ Nova conta</a>
+    </div>
+    {% if accounts %}
+        <div class="grid gap-4 md:grid-cols-2">
+            {% for account in accounts %}
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-6">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm text-slate-400">Conta</p>
+                            <h2 class="text-xl font-semibold text-slate-50">{{ account.name }}</h2>
+                        </div>
+                        <div class="flex gap-2 text-xs">
+                            <a href="{% url 'accounts:update' account.pk %}" class="rounded-full border border-zinc-700 px-3 py-1 text-slate-300 hover:border-slate-500">Editar</a>
+                            <a href="{% url 'accounts:delete' account.pk %}" class="rounded-full border border-rose-500/40 px-3 py-1 text-rose-300 hover:border-rose-400">Excluir</a>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-slate-400">Saldo atual</p>
+                    <p class="text-2xl font-semibold text-emerald-400">R$ {{ account.balance }}</p>
+                    <p class="mt-2 text-xs text-slate-500">Atualizado em {{ account.updated_at|date:'d/m/Y H:i' }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/40 p-8 text-center">
+            <p class="text-lg font-semibold text-slate-200">Nenhuma conta cadastrada ainda</p>
+            <p class="mt-2 text-sm text-slate-400">Clique em "Nova conta" para começar a acompanhar seus saldos.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

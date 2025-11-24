@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Transações - Finanpy{% endblock %}
+
+{% block content %}
+<section class="space-y-8">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <p class="text-sm uppercase tracking-[0.4em] text-indigo-400">Transações</p>
+            <h1 class="text-3xl font-semibold text-slate-50">Histórico financeiro</h1>
+            <p class="text-sm text-slate-400">Registre entradas e saídas para manter o saldo atualizado.</p>
+        </div>
+        <a href="{% url 'transactions:create' %}" class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white">+ Nova transação</a>
+    </div>
+    {% if transactions %}
+        <div class="overflow-hidden rounded-2xl border border-zinc-800">
+            <table class="w-full divide-y divide-zinc-800">
+                <thead class="bg-zinc-900/70 text-left text-sm text-slate-400">
+                    <tr>
+                        <th class="px-6 py-3">Data</th>
+                        <th class="px-6 py-3">Descrição</th>
+                        <th class="px-6 py-3">Categoria</th>
+                        <th class="px-6 py-3">Conta</th>
+                        <th class="px-6 py-3 text-right">Valor</th>
+                        <th class="px-6 py-3 text-right">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-800 bg-zinc-900/40 text-sm text-slate-200">
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td class="px-6 py-4">{{ transaction.date|date:'d/m/Y' }}</td>
+                            <td class="px-6 py-4">{{ transaction.description|default:'—' }}</td>
+                            <td class="px-6 py-4">{{ transaction.category.name }}</td>
+                            <td class="px-6 py-4">{{ transaction.account.name }}</td>
+                            <td class="px-6 py-4 text-right {% if transaction.category.type == 'entrada' %}text-emerald-400{% else %}text-rose-400{% endif %}">
+                                {% if transaction.category.type == 'entrada' %}+{% else %}-{% endif %} R$ {{ transaction.amount }}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{% url 'transactions:update' transaction.pk %}" class="text-slate-300 hover:text-white">Editar</a>
+                                <span class="mx-2 text-zinc-700">|</span>
+                                <a href="{% url 'transactions:delete' transaction.pk %}" class="text-rose-300 hover:text-rose-200">Excluir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/40 p-8 text-center">
+            <p class="text-lg font-semibold text-slate-200">Nenhuma transação encontrada</p>
+            <p class="mt-2 text-sm text-slate-400">Cadastre transações para acompanhar suas finanças.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
