@@ -56,31 +56,31 @@
 
 ### Sprint 2 – Autenticação, custom User e landing page
 
-#### 2.1 Custom User (login por email)
+#### 2.1 Custom User (login por email) [x]
 
-- [ ] No app `users`, criar model custom `User` herdando de `AbstractUser`.
-- [ ] Remover dependência de `username` como identificador principal.
-- [ ] Definir `email` como `USERNAME_FIELD`.
-- [ ] Definir `REQUIRED_FIELDS = []` (ou conforme necessário).
-- [ ] Adicionar campos `created_at` e `updated_at` no modelo `User`.
-- [ ] Criar `UserManager` customizado se necessário para criação por email.
-- [ ] Atualizar `AUTH_USER_MODEL = 'users.User'` em `settings.py`.
-- [ ] Rodar `python manage.py makemigrations users`.
-- [ ] Rodar `python manage.py migrate`.
+- [x] No app `users`, criar model custom `User` herdando de `AbstractUser`.
+- [x] Remover dependência de `username` como identificador principal.
+- [x] Definir `email` como `USERNAME_FIELD`.
+- [x] Definir `REQUIRED_FIELDS = []` (ou conforme necessário).
+- [x] Adicionar campos `created_at` e `updated_at` no modelo `User`.
+- [x] Criar `UserManager` customizado se necessário para criação por email.
+- [x] Atualizar `AUTH_USER_MODEL = 'users.User'` em `settings.py`.
+- [x] Rodar `python manage.py makemigrations users`.
+- [x] Rodar `python manage.py migrate`.
 
-#### 2.2 Views e URLs de autenticação
+#### 2.2 Views e URLs de autenticação [x]
 
-- [ ] Criar view de cadastro (`SignupView`) em `users/views.py` usando `FormView` ou `CreateView`.
-- [ ] Implementar formulário de cadastro com email, senha e confirmação de senha.
-- [ ] Utilizar `LoginView` do Django para login baseado em email.
-- [ ] Configurar `AuthenticationForm` customizado, se necessário, para usar email.
-- [ ] Configurar `LogoutView` para encerrar sessão.
+- [x] Criar view de cadastro (`SignupView`) em `users/views.py` usando `FormView` ou `CreateView`.
+- [x] Implementar formulário de cadastro com email, senha e confirmação de senha.
+- [x] Utilizar `LoginView` do Django para login baseado em email.
+- [x] Configurar `AuthenticationForm` customizado, se necessário, para usar email.
+- [x] Configurar `LogoutView` para encerrar sessão.
 
-- [ ] Criar arquivo `users/urls.py` com rotas:
-  - [ ] `/login/` → `LoginView`.
-  - [ ] `/logout/` → `LogoutView`.
-  - [ ] `/cadastro/` → `SignupView`.
-- [ ] Incluir `users/urls.py` em `core/urls.py` com namespace `users`.
+- [x] Criar arquivo `users/urls.py` com rotas:
+  - [x] `/login/` → `LoginView`.
+  - [x] `/logout/` → `LogoutView`.
+  - [x] `/cadastro/` → `SignupView`.
+- [x] Incluir `users/urls.py` em `core/urls.py` com namespace `users`.
 
 #### 2.3 Templates de autenticação
 
