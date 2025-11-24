@@ -54,7 +54,7 @@
 
 ---
 
-### Sprint 2 – Autenticação, custom User e landing page
+### Sprint 2 – Autenticação, custom User e landing page [x]
 
 #### 2.1 Custom User (login por email) [x]
 
@@ -102,17 +102,17 @@
   - [x] Formulário com campos email, senha, confirmação de senha.
   - [x] Exibir erros campo a campo, seguindo estilo do design system.
 
-#### 2.4 Landing page pública
+#### 2.4 Landing page pública [x]
 
-- [ ] Criar view `home` em `core/views.py`.
-- [ ] Criar template `templates/core/home.html`:
-  - [ ] Seção hero com título principal (ex.: "Organize suas finanças com o Finanpy").
-  - [ ] Subtítulo explicativo.
-  - [ ] Botão "Cadastre-se" (link para rota de cadastro).
-  - [ ] Botão "Entrar" (link para rota de login).
-  - [ ] Uso de gradiente e tema escuro conforme design system.
+- [x] Criar view `home` em `core/views.py`.
+- [x] Criar template `templates/core/home.html`:
+  - [x] Seção hero com título principal (ex.: "Organize suas finanças com o Finanpy").
+  - [x] Subtítulo explicativo.
+  - [x] Botão "Cadastre-se" (link para rota de cadastro).
+  - [x] Botão "Entrar" (link para rota de login).
+  - [x] Uso de gradiente e tema escuro conforme design system.
 
-- [ ] Adicionar rota `''` (raiz) em `core/urls.py` apontando para `home`.
+- [x] Adicionar rota `''` (raiz) em `core/urls.py` apontando para `home`.
 
 ---
 
