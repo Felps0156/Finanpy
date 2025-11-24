@@ -222,53 +222,53 @@
 
 ---
 
-### Sprint 5 – Dashboard, lógica de saldo e UX
+### Sprint 5 – Dashboard, lógica de saldo e UX [x]
 
-#### 5.1 Lógica de saldo
+#### 5.1 Lógica de saldo [x]
 
-- [ ] Definir estratégia para atualização de `balance` em `Account`:
-  - [ ] Ao criar transação de entrada, somar valor ao saldo da conta.
-  - [ ] Ao criar transação de saída, subtrair valor.
-  - [ ] Ao editar transação, recalcular diferença.
-  - [ ] Ao excluir transação, desfazer efeito no saldo.
+- [x] Definir estratégia para atualização de `balance` em `Account`:
+  - [x] Ao criar transação de entrada, somar valor ao saldo da conta.
+  - [x] Ao criar transação de saída, subtrair valor.
+  - [x] Ao editar transação, recalcular diferença.
+  - [x] Ao excluir transação, desfazer efeito no saldo.
 
-- [ ] Implementar essa lógica:
-  - [ ] Via override de `form_valid` nas CBVs, **ou**
-  - [ ] Via signals (`post_save`, `post_delete`) em `transactions/signals.py` (se for usado, respeitar regra de colocar signals em `signals.py`).
-  - [ ] Garantir que essas regras são aplicadas sempre para o usuário correto.
+- [x] Implementar essa lógica:
+  - [x] Via override de `form_valid` nas CBVs, **ou**
+  - [x] Via signals (`post_save`, `post_delete`) em `transactions/signals.py` (se for usado, respeitar regra de colocar signals em `signals.py`).
+  - [x] Garantir que essas regras são aplicadas sempre para o usuário correto.
 
-#### 5.2 Dashboard
+#### 5.2 Dashboard [x]
 
-- [ ] Criar view `DashboardView` (ex.: em `core/views.py`).
-- [ ] Proteger com `LoginRequiredMixin`.
-- [ ] No `get_context_data`:
-  - [ ] Calcular total de entradas (somatório de transações de categorias tipo entrada).
-  - [ ] Calcular total de saídas (somatório de categorias tipo saída).
-  - [ ] Calcular saldo total (ex.: soma dos saldos das contas).
-  - [ ] Obter últimas X transações.
+- [x] Criar view `DashboardView` (ex.: em `core/views.py`).
+- [x] Proteger com `LoginRequiredMixin`.
+- [x] No `get_context_data`:
+  - [x] Calcular total de entradas (somatório de transações de categorias tipo entrada).
+  - [x] Calcular total de saídas (somatório de categorias tipo saída).
+  - [x] Calcular saldo total (ex.: soma dos saldos das contas).
+  - [x] Obter últimas X transações.
 
-- [ ] Criar template `templates/core/dashboard.html`:
-  - [ ] Cards com:
-    - [ ] "Total de entradas".
-    - [ ] "Total de saídas".
-    - [ ] "Saldo total".
-  - [ ] Listagem das últimas transações em tabela ou lista.
-  - [ ] Usar classes do design system (cards, textos, cores).
+- [x] Criar template `templates/core/dashboard.html`:
+  - [x] Cards com:
+    - [x] "Total de entradas".
+    - [x] "Total de saídas".
+    - [x] "Saldo total".
+  - [x] Listagem das últimas transações em tabela ou lista.
+  - [x] Usar classes do design system (cards, textos, cores).
 
-#### 5.3 Aplicar design system globalmente
+#### 5.3 Aplicar design system globalmente [x]
 
-- [ ] Revisar `base.html`:
-  - [ ] Garantir uso correto de background escuro.
-  - [ ] Navbar com gradiente ou detalhe de destaque.
-  - [ ] Tipografia consistente.
+- [x] Revisar `base.html`:
+  - [x] Garantir uso correto de background escuro.
+  - [x] Navbar com gradiente ou detalhe de destaque.
+  - [x] Tipografia consistente.
 
-- [ ] Revisar todos os formulários:
-  - [ ] Aplicar classes de input padrão.
-  - [ ] Garantir espaçamento entre campos (`space-y-4`).
+- [x] Revisar todos os formulários:
+  - [x] Aplicar classes de input padrão.
+  - [x] Garantir espaçamento entre campos (`space-y-4`).
 
-- [ ] Revisar listas (contas, categorias, transações):
-  - [ ] Usar tabelas ou cards com cores consistentes.
-  - [ ] Ações (editar/excluir) com botões utilizando estilo secundário/perigo.
+- [x] Revisar listas (contas, categorias, transações):
+  - [x] Usar tabelas ou cards com cores consistentes.
+  - [x] Ações (editar/excluir) com botões utilizando estilo secundário/perigo.
 
 ---
 

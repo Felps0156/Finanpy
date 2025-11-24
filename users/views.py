@@ -21,7 +21,7 @@ class SignupView(FormView):
 class EmailLoginView(LoginView):
     template_name = 'users/login.html'
     authentication_form = EmailAuthenticationForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
     redirect_authenticated_user = True
 
     def get_success_url(self):

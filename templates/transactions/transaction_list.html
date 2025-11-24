@@ -33,7 +33,7 @@
                             <td class="px-6 py-4">{{ transaction.category.name }}</td>
                             <td class="px-6 py-4">{{ transaction.account.name }}</td>
                             <td class="px-6 py-4 text-right {% if transaction.category.type == 'entrada' %}text-emerald-400{% else %}text-rose-400{% endif %}">
-                                {% if transaction.category.type == 'entrada' %}+{% else %}-{% endif %} R$ {{ transaction.amount }}
+                                {% if transaction.category.type == 'entrada' %}+{% else %}-{% endif %} R$ {{ transaction.amount|floatformat:2 }}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{% url 'transactions:update' transaction.pk %}" class="text-slate-300 hover:text-white">Editar</a>
