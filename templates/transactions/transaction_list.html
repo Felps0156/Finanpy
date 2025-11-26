@@ -3,53 +3,79 @@
 {% block title %}Transações - Finanpy{% endblock %}
 
 {% block content %}
-<section class="space-y-8">
-    <div class="flex flex-wrap items-center justify-between gap-4">
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-            <p class="text-sm uppercase tracking-[0.4em] text-indigo-400">Transações</p>
-            <h1 class="text-3xl font-semibold text-slate-50">Histórico financeiro</h1>
-            <p class="text-sm text-slate-400">Registre entradas e saídas para manter o saldo atualizado.</p>
+            <h1 class="text-3xl font-bold tracking-tight text-white">Histórico</h1>
+            <p class="text-zinc-400">Acompanhe todas as suas entradas e saídas.</p>
         </div>
-        <a href="{% url 'transactions:create' %}" class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white">+ Nova transação</a>
+        <a href="{% url 'transactions:create' %}" class="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20 transition-all hover:scale-105">
+            + Nova Transação
+        </a>
     </div>
+
     {% if transactions %}
-        <div class="overflow-hidden rounded-2xl border border-zinc-800">
-            <table class="w-full divide-y divide-zinc-800">
-                <thead class="bg-zinc-900/70 text-left text-sm text-slate-400">
-                    <tr>
-                        <th class="px-6 py-3">Data</th>
-                        <th class="px-6 py-3">Descrição</th>
-                        <th class="px-6 py-3">Categoria</th>
-                        <th class="px-6 py-3">Conta</th>
-                        <th class="px-6 py-3 text-right">Valor</th>
-                        <th class="px-6 py-3 text-right">Ações</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-zinc-800 bg-zinc-900/40 text-sm text-slate-200">
-                    {% for transaction in transactions %}
+        <div class="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 shadow-lg">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-zinc-400">
+                    <thead class="bg-zinc-900/50 text-xs uppercase font-medium tracking-wider text-zinc-500">
                         <tr>
-                            <td class="px-6 py-4">{{ transaction.date|date:'d/m/Y' }}</td>
-                            <td class="px-6 py-4">{{ transaction.description|default:'—' }}</td>
-                            <td class="px-6 py-4">{{ transaction.category.name }}</td>
-                            <td class="px-6 py-4">{{ transaction.account.name }}</td>
-                            <td class="px-6 py-4 text-right {% if transaction.category.type == 'entrada' %}text-emerald-400{% else %}text-rose-400{% endif %}">
-                                {% if transaction.category.type == 'entrada' %}+{% else %}-{% endif %} R$ {{ transaction.amount|floatformat:2 }}
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="{% url 'transactions:update' transaction.pk %}" class="text-slate-300 hover:text-white">Editar</a>
-                                <span class="mx-2 text-zinc-700">|</span>
-                                <a href="{% url 'transactions:delete' transaction.pk %}" class="text-rose-300 hover:text-rose-200">Excluir</a>
-                            </td>
+                            <th class="px-6 py-4">Data</th>
+                            <th class="px-6 py-4">Descrição</th>
+                            <th class="px-6 py-4">Categoria</th>
+                            <th class="px-6 py-4">Conta</th>
+                            <th class="px-6 py-4 text-right">Valor</th>
+                            <th class="px-6 py-4 text-right">Ações</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-800">
+                        {% for transaction in transactions %}
+                            <tr class="group hover:bg-zinc-900/50 transition-colors">
+                                <td class="whitespace-nowrap px-6 py-4 font-medium text-white">{{ transaction.date|date:'d/m/Y' }}</td>
+                                <td class="px-6 py-4">{{ transaction.description|default:'—' }}</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center rounded-full bg-zinc-800 px-2.5 py-0.5 text-xs font-medium text-zinc-300">
+                                        {{ transaction.category.name }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">{{ transaction.account.name }}</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-right font-bold {% if transaction.category.type == 'entrada' %}text-emerald-400{% else %}text-rose-400{% endif %}">
+                                    {% if transaction.category.type == 'entrada' %}+{% else %}-{% endif %} R$ {{ transaction.amount|floatformat:2 }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <a href="{% url 'transactions:update' transaction.pk %}" class="rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors" title="Editar">
+                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                            </svg>
+                                        </a>
+                                        <a href="{% url 'transactions:delete' transaction.pk %}" class="rounded-lg p-1 text-zinc-400 hover:bg-rose-500/10 hover:text-rose-500 transition-colors" title="Excluir">
+                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     {% else %}
-        <div class="rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/40 p-8 text-center">
-            <p class="text-lg font-semibold text-slate-200">Nenhuma transação encontrada</p>
-            <p class="mt-2 text-sm text-slate-400">Cadastre transações para acompanhar suas finanças.</p>
+        <div class="flex flex-col items-center justify-center rounded-3xl border border-dashed border-zinc-800 bg-zinc-900/30 px-6 py-24 text-center">
+            <div class="h-16 w-16 rounded-full bg-zinc-800/50 flex items-center justify-center mb-4">
+                <svg class="h-8 w-8 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Nenhuma transação</h3>
+            <p class="mt-2 text-zinc-400 max-w-sm">Registre suas receitas e despesas para começar a controlar seu dinheiro.</p>
+            <a href="{% url 'transactions:create' %}" class="mt-6 rounded-xl bg-zinc-100 px-6 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-white transition-colors">
+                Nova transação
+            </a>
         </div>
     {% endif %}
-</section>
+</div>
 {% endblock %}

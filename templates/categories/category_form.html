@@ -3,33 +3,48 @@
 {% block title %}{% if view.object %}Editar categoria{% else %}Nova categoria{% endif %} - Finanpy{% endblock %}
 
 {% block content %}
-<section class="mx-auto w-full max-w-2xl space-y-6">
-    <div class="space-y-2">
-        <p class="text-sm uppercase tracking-[0.4em] text-indigo-400">Categorias</p>
-        <h1 class="text-3xl font-semibold text-slate-50">
-            {% if view.object %}Atualizar categoria{% else %}Cadastrar nova categoria{% endif %}
+<div class="mx-auto max-w-2xl">
+    <!-- Breadcrumb/Header -->
+    <div class="mb-8">
+        <a href="{% url 'categories:list' %}" class="mb-4 inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Voltar para categorias
+        </a>
+        <h1 class="text-3xl font-bold tracking-tight text-white">
+            {% if view.object %}Editar Categoria{% else %}Nova Categoria{% endif %}
         </h1>
-        <p class="text-sm text-slate-400">Defina o nome e o tipo (entrada ou saída).</p>
+        <p class="mt-2 text-zinc-400">Defina o nome e o tipo para organizar suas transações.</p>
     </div>
-    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-8">
-        <form method="post" class="space-y-5">
+
+    <!-- Form Card -->
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 shadow-xl backdrop-blur-sm">
+        <form method="post" class="space-y-6">
             {% csrf_token %}
+            
             {% for field in form %}
-                <div class="space-y-1.5">
-                    <label class="text-sm font-medium text-slate-200" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300" for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
+                    {% if field.help_text %}
+                         <p class="text-xs text-zinc-500">{{ field.help_text }}</p>
+                    {% endif %}
                     {% if field.errors %}
-                        <p class="text-sm text-rose-400">{{ field.errors|striptags }}</p>
+                        <p class="text-sm text-red-400">{{ field.errors|striptags }}</p>
                     {% endif %}
                 </div>
             {% endfor %}
-            <div class="flex flex-wrap gap-3">
-                <button type="submit" class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white">
-                    {% if view.object %}Salvar alterações{% else %}Criar categoria{% endif %}
+
+            <div class="flex items-center justify-end gap-4 pt-4 border-t border-zinc-800/50">
+                <a href="{% url 'categories:list' %}" class="rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors">
+                    Cancelar
+                </a>
+                <button type="submit" class="rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20 transition-all hover:scale-105">
+                    {% if view.object %}Salvar Alterações{% else %}Criar Categoria{% endif %}
                 </button>
-                <a href="{% url 'categories:list' %}" class="rounded-full border border-zinc-700 px-6 py-3 text-sm font-semibold text-slate-300">Cancelar</a>
             </div>
         </form>
     </div>
-</section>
+</div>
 {% endblock %}

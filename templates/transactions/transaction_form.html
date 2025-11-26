@@ -3,63 +3,80 @@
 {% block title %}{% if view.object %}Editar transação{% else %}Nova transação{% endif %} - Finanpy{% endblock %}
 
 {% block content %}
-<section class="mx-auto w-full max-w-3xl space-y-6">
-    <div class="space-y-2">
-        <p class="text-sm uppercase tracking-[0.4em] text-indigo-400">Transações</p>
-        <h1 class="text-3xl font-semibold text-slate-50">
-            {% if view.object %}Atualizar transação{% else %}Registrar nova transação{% endif %}
+<div class="mx-auto max-w-3xl">
+    <!-- Breadcrumb/Header -->
+    <div class="mb-8">
+        <a href="{% url 'transactions:list' %}" class="mb-4 inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Voltar para histórico
+        </a>
+        <h1 class="text-3xl font-bold tracking-tight text-white">
+            {% if view.object %}Editar Transação{% else %}Nova Transação{% endif %}
         </h1>
-        <p class="text-sm text-slate-400">Associe conta, categoria, valor e data para manter o saldo correto.</p>
+        <p class="mt-2 text-zinc-400">Associe conta, categoria, valor e data para manter o saldo correto.</p>
     </div>
-    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-8">
-        <form method="post" class="space-y-5">
+
+    <!-- Form Card -->
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 shadow-xl backdrop-blur-sm">
+        <form method="post" class="space-y-6">
             {% csrf_token %}
-            <div class="grid gap-5 md:grid-cols-2">
-                <div class="space-y-1.5">
-                    <label class="text-sm font-medium text-slate-200" for="{{ form.account.id_for_label }}">{{ form.account.label }}</label>
+            
+            <!-- Account & Category -->
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300" for="{{ form.account.id_for_label }}">{{ form.account.label }}</label>
                     {{ form.account }}
                     {% if form.account.errors %}
-                        <p class="text-sm text-rose-400">{{ form.account.errors|striptags }}</p>
+                        <p class="text-sm text-red-400">{{ form.account.errors|striptags }}</p>
                     {% endif %}
                 </div>
-                <div class="space-y-1.5">
-                    <label class="text-sm font-medium text-slate-200" for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300" for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
                     {{ form.category }}
                     {% if form.category.errors %}
-                        <p class="text-sm text-rose-400">{{ form.category.errors|striptags }}</p>
+                        <p class="text-sm text-red-400">{{ form.category.errors|striptags }}</p>
                     {% endif %}
                 </div>
             </div>
-            <div class="grid gap-5 md:grid-cols-2">
-                <div class="space-y-1.5">
-                    <label class="text-sm font-medium text-slate-200" for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+
+            <!-- Amount & Date -->
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300" for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
                     {{ form.amount }}
                     {% if form.amount.errors %}
-                        <p class="text-sm text-rose-400">{{ form.amount.errors|striptags }}</p>
+                        <p class="text-sm text-red-400">{{ form.amount.errors|striptags }}</p>
                     {% endif %}
                 </div>
-                <div class="space-y-1.5">
-                    <label class="text-sm font-medium text-slate-200" for="{{ form.date.id_for_label }}">{{ form.date.label }}</label>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300" for="{{ form.date.id_for_label }}">{{ form.date.label }}</label>
                     {{ form.date }}
                     {% if form.date.errors %}
-                        <p class="text-sm text-rose-400">{{ form.date.errors|striptags }}</p>
+                        <p class="text-sm text-red-400">{{ form.date.errors|striptags }}</p>
                     {% endif %}
                 </div>
             </div>
-            <div class="space-y-1.5">
-                <label class="text-sm font-medium text-slate-200" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+
+            <!-- Description -->
+            <div class="space-y-2">
+                <label class="text-sm font-medium text-zinc-300" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
                 {{ form.description }}
                 {% if form.description.errors %}
-                    <p class="text-sm text-rose-400">{{ form.description.errors|striptags }}</p>
+                    <p class="text-sm text-red-400">{{ form.description.errors|striptags }}</p>
                 {% endif %}
             </div>
-            <div class="flex flex-wrap gap-3">
-                <button type="submit" class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white">
-                    {% if view.object %}Salvar alterações{% else %}Registrar transação{% endif %}
+
+            <div class="flex items-center justify-end gap-4 pt-4 border-t border-zinc-800/50">
+                <a href="{% url 'transactions:list' %}" class="rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors">
+                    Cancelar
+                </a>
+                <button type="submit" class="rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20 transition-all hover:scale-105">
+                    {% if view.object %}Salvar Alterações{% else %}Registrar Transação{% endif %}
                 </button>
-                <a href="{% url 'transactions:list' %}" class="rounded-full border border-zinc-700 px-6 py-3 text-sm font-semibold text-slate-300">Cancelar</a>
             </div>
         </form>
     </div>
-</section>
+</div>
 {% endblock %}

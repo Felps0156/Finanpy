@@ -3,39 +3,49 @@
 {% block title %}Entrar - Finanpy{% endblock %}
 
 {% block content %}
-<section class="mx-auto w-full max-w-md">
-    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-8 shadow-2xl shadow-indigo-900/20">
-        <div class="space-y-2 text-center">
-            <p class="text-xs uppercase tracking-[0.4em] text-indigo-400">Acesso</p>
-            <h1 class="text-2xl font-semibold">Entrar na sua conta</h1>
-            <p class="text-sm text-slate-400">Informe seu email e senha cadastrados.</p>
+<div class="auth-shell">
+<div class="w-full max-w-md">
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 shadow-2xl shadow-indigo-500/10 backdrop-blur-sm">
+        <div class="mb-8 text-center">
+             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+             </div>
+            <h1 class="text-2xl font-bold tracking-tight text-white">Bem-vindo de volta!</h1>
+            <p class="mt-2 text-sm text-zinc-400">Informe suas credenciais para acessar.</p>
         </div>
+
         {% if form.non_field_errors %}
-            <div class="mt-6 rounded-xl border border-red-600/50 bg-red-900/30 px-4 py-3 text-sm text-red-200">
+            <div class="mb-6 rounded-lg bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-400">
                 {% for error in form.non_field_errors %}
                     <p>{{ error }}</p>
                 {% endfor %}
             </div>
         {% endif %}
-        <form method="post" class="mt-6 space-y-5">
+
+        <form method="post" class="space-y-6">
             {% csrf_token %}
             {% for field in form %}
-                <div class="space-y-1.5">
-                    <label class="text-sm font-medium text-slate-200" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300" for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
                     {% if field.errors %}
                         <p class="text-sm text-red-400">{{ field.errors|striptags }}</p>
                     {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-indigo-500/30">
+
+            <button type="submit" class="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/25 transition-all hover:scale-[1.02]">
                 Entrar
             </button>
         </form>
-        <p class="mt-6 text-center text-sm text-slate-400">
-            Ainda não possui conta?
-            <a class="font-medium text-indigo-400 hover:text-indigo-300" href="{% url 'users:signup' %}">Cadastre-se</a>
+
+        <p class="mt-8 text-center text-sm text-zinc-400">
+            Não tem uma conta?
+            <a class="font-medium text-indigo-400 hover:text-indigo-300 hover:underline" href="{% url 'users:signup' %}">Cadastre-se agora</a>
         </p>
     </div>
-</section>
+</div>
+</div>
 {% endblock %}

@@ -6,30 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Finanpy{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Custom scrollbar for sidebar */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-slate-50">
-    <header class="sticky top-0 z-50 border-b border-zinc-900/70 bg-zinc-950/80 backdrop-blur">
-        <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-            <div class="flex items-center gap-3">
-                <span class="h-8 w-8 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600"></span>
-                <a class="text-lg font-semibold tracking-tight" href="{% url 'home' %}">Finanpy</a>
-            </div>
-            <nav class="flex items-center gap-4 text-sm">
-                {% if request.user.is_authenticated %}
-                    <a class="text-slate-300 hover:text-white transition-colors" href="{% url 'dashboard' %}">Dashboard</a>
-                    <span class="text-slate-400">Olá, {{ request.user.email }}</span>
-                    <a class="rounded-full border border-zinc-700 px-5 py-2 text-slate-200 hover:border-zinc-500" href="{% url 'users:logout' %}">Sair</a>
-                {% else %}
-                    <a class="text-slate-400 hover:text-slate-50 transition-colors" href="{% url 'users:login' %}">Entrar</a>
-                    <a class="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-slate-50 font-medium" href="{% url 'users:signup' %}">Cadastre-se</a>
-                {% endif %}
-            </nav>
+<body class="h-full bg-zinc-950 text-slate-50 antialiased selection:bg-indigo-500/30">
+    
+    <div class="{% if request.user.is_authenticated %}flex h-full overflow-hidden{% else %}flex min-h-screen flex-col bg-gradient-to-b from-zinc-900 to-zinc-950{% endif %}">
+        
+        {% if request.user.is_authenticated %}
+            <!-- Sidebar (Desktop) -->
+            <aside class="hidden md:flex w-72 flex-col border-r border-zinc-800 bg-zinc-900/30 backdrop-blur-xl z-50">
+                <!-- Brand -->
+                <div class="flex h-16 items-center gap-3 px-6 border-b border-zinc-800/50">
+                    <div class="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20">
+                        <span class="text-lg font-bold text-white">F</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-white">Finanpy</span>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="flex-1 space-y-1 overflow-y-auto px-3 py-6">
+                    <!-- Dashboard -->
+                    <a href="{% url 'dashboard' %}" 
+                       class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 
+                       {% if request.resolver_match.url_name == 'dashboard' %}bg-zinc-800/80 text-white shadow-inner shadow-white/5{% else %}text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100{% endif %}">
+                        <svg class="h-5 w-5 {% if request.resolver_match.url_name == 'dashboard' %}text-indigo-400{% else %}text-zinc-500 group-hover:text-zinc-300{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                        </svg>
+                        Dashboard
+                    </a>
+
+                    <div class="px-3 pt-4 pb-2">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Gestão</p>
+                    </div>
+
+                    <!-- Accounts -->
+                    <a href="{% url 'accounts:list' %}" 
+                       class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
+                       {% if 'accounts' in request.path %}bg-zinc-800/80 text-white shadow-inner shadow-white/5{% else %}text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100{% endif %}">
+                        <svg class="h-5 w-5 {% if 'accounts' in request.path %}text-indigo-400{% else %}text-zinc-500 group-hover:text-zinc-300{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                        </svg>
+                        Contas
+                    </a>
+
+                    <!-- Transactions -->
+                    <a href="{% url 'transactions:list' %}" 
+                       class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
+                       {% if 'transactions' in request.path %}bg-zinc-800/80 text-white shadow-inner shadow-white/5{% else %}text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100{% endif %}">
+                        <svg class="h-5 w-5 {% if 'transactions' in request.path %}text-indigo-400{% else %}text-zinc-500 group-hover:text-zinc-300{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                        </svg>
+                        Transações
+                    </a>
+
+                    <!-- Categories -->
+                    <a href="{% url 'categories:list' %}" 
+                       class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
+                       {% if 'categories' in request.path %}bg-zinc-800/80 text-white shadow-inner shadow-white/5{% else %}text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100{% endif %}">
+                        <svg class="h-5 w-5 {% if 'categories' in request.path %}text-indigo-400{% else %}text-zinc-500 group-hover:text-zinc-300{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                        </svg>
+                        Categorias
+                    </a>
+                </nav>
+
+                <!-- User Footer -->
+                <div class="border-t border-zinc-800 p-4">
+                    <div class="flex items-center gap-3 rounded-xl bg-zinc-800/50 p-3">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 text-xs font-bold text-white">
+                            {{ request.user.email|first|upper }}
+                        </div>
+                        <div class="flex flex-1 flex-col overflow-hidden">
+                            <span class="truncate text-sm font-medium text-white">{{ request.user.email }}</span>
+                            <a href="{% url 'users:logout' %}" class="truncate text-xs text-zinc-400 hover:text-red-400 transition-colors">Sair da conta</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        {% endif %}
+
+        <!-- Main Content Wrapper -->
+        <div class="flex flex-1 flex-col overflow-hidden">
+            {% if request.user.is_authenticated %}
+                <!-- Mobile Header -->
+                <header class="flex h-16 items-center justify-between border-b border-zinc-800 bg-zinc-950 px-4 md:hidden">
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600"></div>
+                        <span class="text-lg font-bold">Finanpy</span>
+                    </div>
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </header>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="hidden border-b border-zinc-800 bg-zinc-950 md:hidden">
+                    <nav class="flex flex-col space-y-1 p-4">
+                        <a href="{% url 'dashboard' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800">Dashboard</a>
+                        <a href="{% url 'accounts:list' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800">Contas</a>
+                        <a href="{% url 'transactions:list' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800">Transações</a>
+                        <a href="{% url 'categories:list' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800">Categorias</a>
+                        <a href="{% url 'users:logout' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-red-400 hover:bg-zinc-800">Sair</a>
+                    </nav>
+                </div>
+            {% else %}
+                 <!-- Public Header -->
+                <header class="border-b border-zinc-800/50 bg-zinc-950/50 backdrop-blur-sm">
+                    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <span class="h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20"></span>
+                            <a class="text-xl font-bold tracking-tight" href="{% url 'home' %}">Finanpy</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a class="text-sm font-medium text-zinc-400 hover:text-white transition-colors" href="{% url 'users:login' %}">Entrar</a>
+                            <a class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-900 hover:bg-zinc-200 transition-colors" href="{% url 'users:signup' %}">Cadastre-se</a>
+                        </div>
+                    </div>
+                </header>
+            {% endif %}
+
+            <!-- Main -->
+            <main class="{% if request.user.is_authenticated %}flex-1 overflow-y-auto bg-zinc-950 p-4 sm:p-8 lg:p-10{% else %}flex flex-1 items-center justify-center px-6 py-12{% endif %}">
+                <div class="{% if request.user.is_authenticated %}mx-auto max-w-6xl{% else %}w-full{% endif %}">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+
+            {% if not request.user.is_authenticated %}
+                <!-- Public Footer -->
+                <footer class="border-t border-zinc-800/50 py-6">
+                    <div class="mx-auto max-w-6xl text-center text-sm text-zinc-500">
+                        &copy; {% now "Y" %} Finanpy. Todos os direitos reservados.
+                    </div>
+                </footer>
+            {% endif %}
         </div>
-        <div class="h-1 w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600/80 opacity-60"></div>
-    </header>
-    <main class="mx-auto w-full max-w-6xl px-6 py-12">
-        {% block content %}
-        {% endblock %}
-    </main>
+    </div>
 </body>
 </html>
